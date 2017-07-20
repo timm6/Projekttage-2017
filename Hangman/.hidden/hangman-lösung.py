@@ -1,5 +1,8 @@
 # Hangman
 
+from hangman_renderer import render_hangman
+
+
 def convert_upper_case(string):
     if "ß" in string:
         chars = []
@@ -19,25 +22,26 @@ def spielmodus_fragen():
     antwort = input("Wählen Sie einen Spielmodus (single/multi): ")
     
     if antwort == "single":
-        worte = ["Schmetterling", "Schokokuchen", "Faupax", "Rhythmus", "Rhesusfaktor", "Physiognomie", "Jazz", "Fahrradkette", "Steppe"]
+        worte = ["Schmetterling", "Schokokuchen", "Kuhmist", "Faupax", "Rhythmus", "Rhesusfaktor", "Physiognomie", "Jazz", "Fahrradkette", "Steppe", "Militär"]
         import random
         return worte[random.randint(0, len(worte) - 1)]
     else:
-        return input("\nGeben Sie das gewünschte Wort ein: ")
+        while True:
+            eingabe = input("\nGeben Sie das gewünschte Wort ein: ")
+            if eingabe.isalpha():
+                return eingabe
+            else:
+                print("\nUngültige Eingabe!")
 
 
 def zeichne_spiel():
-    global falsche_buchstaben, meldung, erratenes_wort
+    global falsche_buchstaben, meldung, erratenes_wort, fehlversuche
 
     print("\n" * 100)
 
-    # zeichne Hangman -> Alex schreiben
+    render_hangman(fehlversuche)
 
-    print("Falsche Buchstaben: " + convert_upper_case(", ".join(falsche_buchstaben)))
-    print()
-    print(meldung)
-    print()
-    print(convert_upper_case(" ".join(erratenes_wort)))
+    print("\nFalsche Buchstaben: " + convert_upper_case(", ".join(falsche_buchstaben)) + "\n\n" + meldung + "\n\n" + convert_upper_case(" ".join(erratenes_wort)))
 
 
 def rate_buchstabe():

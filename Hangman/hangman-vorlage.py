@@ -1,5 +1,8 @@
 # Hangman
 
+from hangman_renderer import render_hangman
+
+
 def convert_upper_case(string):
     if "ß" in string:
         chars = []
@@ -19,21 +22,27 @@ def spielmodus_fragen():
     
     
     # Falls Einzelspieler gewählt wurde folgenden Code ausführen
-        worte = ["Schmetterling", "Schokokuchen", "Faupax", "Rhythmus", "Rhesusfaktor", "Physiognomie", "Jazz", "Fahrradkette", "Steppe"]
+        worte = ["Schmetterling", "Schokokuchen", "Kuhmist", "Faupax", "Rhythmus", "Rhesusfaktor", "Physiognomie", "Jazz", "Fahrradkette", "Steppe"]
         # hier kannst du noch mehr Wörter einfügen
 
         import random
         return worte[random.randint(0, len(worte) - 1)]     # diese zwei Zeilen sorgen für die zufällige Auswahl
 
-    # Falls Mehrspieler gewählt wurde Spieler nach eigenem Wort fragen
+    # Falls Mehrspieler gewählt wurde folgenden Code ausführen
+        # Endlosschleife
+            # eigenes Wort vom Spieler erhalten
+            # prüfen ob das Wort nur aus Buchstaben besteht: eingabe.isalpha()
+                # wenn ja zurückgeben
+            # ansonsten
+                # Meldung ausgeben, Endlosschleife fortsetzen
 
 
 def zeichne_spiel():
-    global falsche_buchstaben, meldung, erratenes_wort
+    global falsche_buchstaben, meldung, erratenes_wort, fehlversuche
 
     print("\n" * 100)       # 100 leere Zeilen, damit der Bildschirm "leer" ist
 
-    # zeichne Hangman -> Alex schreiben
+    render_hangman(fehlversuche)    # zeichnet den Hangman abhängig der bisherigen Fehlversuche
 
     # falsche Buchstaben ausgeben
     #
