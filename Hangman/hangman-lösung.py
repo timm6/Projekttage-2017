@@ -1,5 +1,18 @@
 # Hangman
 
+def convert_upper_case(string):
+    if "ß" in string:
+        chars = []
+        for char in string:
+            if char == "ß":
+                chars.append("ß")
+            else:
+                chars.append(char.upper())
+        return "".join(chars)
+    else:
+        return string.upper()
+
+
 def spielmodus_fragen():
     # Benutzer nach Spielmodus fragen (Einzel/Multi)
 
@@ -20,11 +33,11 @@ def zeichne_spiel():
 
     # zeichne Hangman -> Alex schreiben
 
-    print("Falsche Buchstaben: " + ", ".join(falsche_buchstaben).upper())
+    print("Falsche Buchstaben: " + convert_upper_case(", ".join(falsche_buchstaben)))
     print()
     print(meldung)
     print()
-    print(" ".join(erratenes_wort).upper())
+    print(convert_upper_case(" ".join(erratenes_wort)))
 
 
 def rate_buchstabe():
